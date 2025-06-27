@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  renovate:
+    image: renovate/renovate:latest
+    container_name: renovate
+    restart: always
+    environment:
+      # GitLab integration
+      RENOVATE_PLATFORM: gitlab
+      RENOVATE_ENDPOINT: https://gitlab.mycompany.com/api/v4
+      RENOVATE_TOKEN: ${RENOVATE_TOKEN}
+      # Artifactory/NPM/Maven credentials
+      NPM_TOKEN: ${NPM_TOKEN}
+      MAVEN_USERNAME: ${MAVEN_USERNAME}
+      MAVEN_PASSWORD: ${MAVEN_PASSWORD}
+      # (опционально) дополнительные переменные для других менеджеров пакетов
+      # PYPI_USERNAME: ${PYPI_USERNAME}
+      # PYPI_PASSWORD: ${PYPI_PASSWORD}
+      # Логирование
+      LOG_LEVEL: info
+      # Если нужен прокси
+      # HTTP_PROXY: ${HTTP_PROXY}
+      # HTTPS_PROXY: ${HTTPS_PROXY}
+    volumes:
+      # Глобальная конфигурация Renovate (опционально)
+      - ./config.js:/opt/renovate/config.js:ro
+      # Локальный .npmrc если нужен для Artifactory
+      - ./npmrc:/home/renovate/.npmrc:ro
+      # Локальный .m2/settings.xml если нужен для Maven
+      - ./settings.xml:/home/renovate/.m2/settings.xml:ro
+      # (опционально) если используете pip/pypirc
+      # - ./pypirc:/home/renovate/.pypirc:ro
+      # Кэш (опционально, для ускорения работы)
+      - renovate_cache:/tmp/renovate
+    # (опционально) если нужен другой пользователь
+    # user: "1000:1000"
+
+volumes:
+  renovate_cache:

@@ -1,0 +1,16 @@
+<settings>
+    <servers>
+        <server>
+            <id>artifactory</id>
+            <username>${MAVEN_USERNAME}</username>
+            <password>${MAVEN_PASSWORD}</password>
+        </server>
+    </servers>
+    <mirrors>
+        <mirror>
+            <id>artifactory</id>
+            <url>https://artifactory.mycompany.com/artifactory/maven</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>

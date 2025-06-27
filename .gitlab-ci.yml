@@ -1,0 +1,14 @@
+renovate:
+  image: renovate/renovate:latest
+  script:
+    - renovate # или, если нужен конкретный проект: renovate mygroup/myrepo
+  variables:
+    RENOVATE_PLATFORM: gitlab
+    RENOVATE_ENDPOINT: https://gitlab.mycompany.com/api/v4
+    RENOVATE_TOKEN: $RENOVATE_TOKEN
+    # Дополнительные переменные для Artifactory/NPM/Maven и т.д.
+    NPM_TOKEN: $NPM_TOKEN
+    MAVEN_USERNAME: $MAVEN_USERNAME
+    MAVEN_PASSWORD: $MAVEN_PASSWORD
+  only:
+    - schedules
