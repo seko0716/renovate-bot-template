@@ -22,6 +22,8 @@ services:
       # Если нужен прокси
       # HTTP_PROXY: ${HTTP_PROXY}
       # HTTPS_PROXY: ${HTTPS_PROXY}
+      MAVEN_OPTS: "-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true"
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
     volumes:
       # Глобальная конфигурация Renovate (опционально)
       - ./config.js:/opt/renovate/config.js:ro
