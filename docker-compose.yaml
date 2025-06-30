@@ -23,10 +23,14 @@ services:
       # HTTP_PROXY: ${HTTP_PROXY}
       # HTTPS_PROXY: ${HTTPS_PROXY}
       MAVEN_OPTS: "-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true"
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+#      NODE_EXTRA_CA_CERTS: /your-ca-certs-path/my-org-cert.cer
+#      SSL_CERT_FILE: /your-ca-certs-path/my-org-cert.cer
+#      GIT_SSL_CAINFO: /your-ca-certs-path/my-org-cert.cer
+#      NODE_OPTIONS: --use-openssl-ca
     volumes:
+#      - ./certs/my-org-cert.cer:/your-ca-certs-path/my-org-cert.cer:ro
       # Глобальная конфигурация Renovate (опционально)
-      - ./config.js:/opt/renovate/config.js:ro
+      - ./config.js:/user/src/app/config.js:ro
       # Локальный .npmrc если нужен для Artifactory
       - ./npmrc:/home/renovate/.npmrc:ro
       # Локальный .m2/settings.xml если нужен для Maven
